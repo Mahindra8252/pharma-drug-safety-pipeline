@@ -23,6 +23,18 @@ OPENFDA_API_KEY = os.getenv("OPENFDA_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 DB_URI = os.getenv("DB_URI", "")
 
+# Fallback to Streamlit secrets if running in Streamlit Cloud context
+try:
+    import streamlit as st
+    if "GEMINI_API_KEY" in st.secrets:
+        GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+    if "OPENFDA_API_KEY" in st.secrets:
+        OPENFDA_API_KEY = st.secrets["OPENFDA_API_KEY"]
+    if "DB_URI" in st.secrets:
+        DB_URI = st.secrets["DB_URI"]
+except Exception:
+    pass
+
 # If DB_URI is not set, default to a local SQLite database in the Gold layer
 if not DB_URI:
     DB_URI = f"sqlite:///{GOLD_DIR / 'safety_signals.db'}"
