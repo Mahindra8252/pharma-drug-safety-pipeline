@@ -206,6 +206,7 @@ class SafetyRAGAgent:
         self.has_llm = bool(self.api_key) and GOOGLE_GENAI_AVAILABLE
         self.model = None
         self.model_name = "gemini-3.5-flash"
+        self.init_error = None
         
         self.system_instruction = (
             "You are FAERSight Assistant, a clinical pharmacovigilance safety expert reviewing adverse event reports from the FDA FAERS database.\n"
@@ -232,6 +233,7 @@ class SafetyRAGAgent:
                 logger.info("Google Gemini RAG Client initialized with gemini-3.5-flash.")
             except Exception as e:
                 logger.error(f"Error configuring Gemini client: {str(e)}")
+                self.init_error = f"Gemini configuration failed: {str(e)}"
                 self.has_llm = False
 
     def _extract_drugs(self, query: str) -> list:
@@ -286,6 +288,7 @@ class SafetyRAGAgent:
                 return self.model.start_chat(enable_automatic_function_calling=True)
             except Exception as ex:
                 logger.error(f"Failed to initialize fallback gemini-2.5-flash model: {ex}")
+                self.init_error = f"Start chat failed with {self.model_name}: {e}. Fallback failed: {ex}"
                 self.has_llm = False
                 return None
 

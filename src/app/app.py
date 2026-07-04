@@ -615,6 +615,8 @@ def main():
                 <span>AI Engine: Offline Mode (Displaying Relational Database Stats)</span>
             </div>
             """, unsafe_allow_html=True)
+            if hasattr(agent, "init_error") and agent.init_error:
+                st.error(f"⚠️ **Gemini API Key / Setup Error:** {agent.init_error}")
             
         # Quick suggestions
         st.markdown("**Example queries to try:**")
