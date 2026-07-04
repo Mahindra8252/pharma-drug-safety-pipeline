@@ -1,0 +1,26 @@
+# Python environment & cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.ruff_cache/
+
+# Local configuration
+.env
+
+# Data layers (Bronze, Silver, Gold data files)
+data/
+*.db
+*.sqlite
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store

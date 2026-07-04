@@ -1,0 +1,17 @@
+# Core Data & ETL
+pandas>=2.0.0
+numpy>=1.24.0
+requests>=2.30.0
+python-dotenv>=1.0.0
+scipy>=1.10.0
+
+# Visualization & App
+streamlit>=1.22.0
+plotly>=5.15.0
+
+# RAG & AI
+google-generativeai>=0.3.0
+
+# Quality & Testing (Dev)
+pytest>=7.3.0
+ruff>=0.0.270
